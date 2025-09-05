@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useState } from 'react';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import Script from 'next/script';   
 import { 
   FaShieldAlt, 
   FaCheckCircle, 
@@ -126,37 +129,93 @@ function Page() {
   };
 
   const handlePayment = async (amount: number, productName: string) => {
+    if (amount <= 0) return;
+
     setIsProcessing(true);
-    
-    // Simulate API call delay
-    setTimeout(() => {
+
+    try {
+      // Create order directly
+      const res = await fetch('/api/payments/razorpay/createOrder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount: amount * 100 }),
+      });
+      
+      const data = await res.json();
+      
+      // Setup Razorpay payment
+      const PaymentData = {
+        key: process.env.RAZORPAY_LIVE_KEY_ID,
+        amount: amount * 100,
+        currency: "INR",
+        name: "payNex",
+        description: "Payment testing or support",
+        order_id: data.id,
+        
+        handler: async function (response: any) {
+          // Verify payment
+          const res = await fetch("/api/payments/razorpay/verifyOrder", {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              orderId: response.razorpay_order_id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpaySignature: response.razorpay_signature,
+            }),
+          });
+          
+          const data = await res.json();
+          
+          if (data.isOk) {
+            // Payment successful - 
+            alert("Payment successful!");
+          } else {
+            alert("Payment failed");
+          }
+        },
+        prefill: {
+          name: "payNex",
+        },
+        theme: {
+          color: "#6366f1",
+        },
+        modal: {
+          ondismiss: function() {
+            setIsProcessing(false);
+          }
+        }
+      };
+
+      // Check if Razorpay is loaded
+      if (typeof window !== 'undefined' && (window as any).Razorpay) {
+        const payment = new (window as any).Razorpay(PaymentData);
+        payment.open();
+      } else {
+        throw new Error('Razorpay SDK not loaded');
+      }
+      
+      // Reset processing state after Razorpay modal opens
       setIsProcessing(false);
-      
-      const isTestPayment = amount === 1;
-      const successMessage = isTestPayment 
-        ? `🧪 Test Payment Successful!\n\n` +
-          `Congratulations! You've successfully tested the payment system.\n` +
-          `Amount: ₹${amount}\n` +
-          `Product: ${productName}\n\n` +
-          `🎉 You've made a developer smile today!\n` +
-          `The ₹1 will go towards buying a samosa for the dev team.`
-        : `🚀 Payment Trigger Initiated!\n\n` +
-          `Product: ${productName}\n` +
-          `Amount: ₹${amount}\n` +
-          `Gateway: Razorpay\n\n` +
-          `💝 Thank you for supporting indie development!\n\n` +
-          `Note: This is a demo. In production, this would:\n` +
-          `1. Create order via /api/razorpay/create-order\n` +
-          `2. Open Razorpay checkout widget\n` +
-          `3. Handle success/failure callbacks\n` +
-          `4. Verify payment via /api/razorpay/verify`;
-      
-      alert(successMessage);
-    }, 1500);
+        
+    } catch (error) {
+        console.error("Payment error:", error);
+        alert("There was an error processing your payment. Please try again.");
+        setIsProcessing(false);
+    }
+    
   };
 
   return (
     <>
+    <Script 
+        type='text/javascript'
+        src='https://checkout.razorpay.com/v1/checkout.js'
+        strategy="lazyOnload"
+      />
       <Navbar />
       
       <div className="min-h-screen bg-gray-900 text-white">
