@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 // Site metadata
 export const metadata: Metadata = {
   title: {
-    default: "nexpay Hub – Multi-Payment Integration",
+    default: "nexpay – Multi-Payment Integration",
     template: "%s | nexpay Hub",
   },
   description:
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   ],
   metadataBase: new URL("https://nexpayhub.vercel.app"), // replace with your actual deployed domain
   openGraph: {
-    title: "nexpay Hub – Multiple Payment Gateway Integration",
+    title: "nexpay – Multiple Payment Gateway Integration",
     description:
       "Explore a powerful starter template for integrating multiple payment providers using Next.js, TypeScript, and Tailwind CSS.",
     url: "https://nex--pay.vercel.app",
