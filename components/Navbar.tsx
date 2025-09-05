@@ -15,7 +15,7 @@ export default function Navbar() {
             <FaCreditCard className="text-white text-sm" />
           </div>
           <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent group-hover:from-purple-300 group-hover:to-pink-300 transition-all duration-200">
-            PayGate Hub
+            nexpay
           </span>
         </Link>
         

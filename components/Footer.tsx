@@ -32,7 +32,7 @@ export default function Footer() {
                 <FaCreditCard className="text-white text-sm" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                PayGate Hub
+                nexpay 
               </span>
             </Link>
             <p className="text-gray-400 max-w-md mb-4">
@@ -124,7 +124,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             {/* Copy Info */}
             <div className="flex flex-wrap items-center space-x-2 text-gray-400 text-sm">
-              <span>© {currentYear} PayGate Hub.</span>
+              <span>© {currentYear} nexpay Hub.</span>
               <span>Crafted with</span>
               <FaHeart className="text-red-500 text-sm animate-pulse" />
               <span>by</span>
