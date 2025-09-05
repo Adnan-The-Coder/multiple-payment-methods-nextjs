@@ -9,95 +9,95 @@ import {
   FaCreditCard,
   FaMobile,
   FaUniversity,
-  FaWallet,
   FaArrowLeft,
   FaRupeeSign,
   FaLock,
   FaBolt,
-  FaGlobe,
-  FaHeadset,
   FaHeart,
   FaCoffee,
   FaRocket,
   FaGem,
-  FaFlask
+  FaFlask,
+  FaQrcode,
+  FaUserFriends,
+  FaStore
 } from 'react-icons/fa';
 import { 
-  SiRazorpay 
+  SiPhonepe 
 } from 'react-icons/si';
 import Link from 'next/link';
 
-// Enhanced products with author support theme
+// Enhanced products with author support theme - PhonePe flavor
 const sampleProducts = [
   {
     id: 1,
-    name: "Caffeine Catalyst ☕",
-    price: 99,
-    originalPrice: 149,
-    image: "☕️",
-    description: "Fuel the late-night coding sessions that bring you awesome features. Because bugs don't fix themselves at 3 AM!",
-    features: ["Early Access Updates", "Bug Reports Priority", "Grateful Developer Heart"],
-    supportType: "Basic Support"
+    name: "Chai Break Champion 🍵",
+    price: 75,
+    originalPrice: 125,
+    image: "🍵",
+    description: "Support the sacred Indian ritual of chai breaks that fuel breakthrough moments. Every great code started with a great chai!",
+    features: ["Early Feature Previews", "Priority Bug Squashing", "Thankful Developer Namaste"],
+    supportType: "Desi Basic"
   },
   {
     id: 2,
-    name: "Feature Fairy 🧚‍♂️",
-    price: 299,
-    originalPrice: 499,
-    image: "🚀",
-    description: "Help manifest those 'it would be cool if...' ideas into reality. Your wish is literally our command!",
-    features: ["Feature Request Priority", "Beta Access", "Direct Developer Chat", "Name in Hall of Fame"],
-    supportType: "Premium Support"
+    name: "Innovation Instigator 🚀",
+    price: 250,
+    originalPrice: 400,
+    image: "🎯",
+    description: "Help transform those 'arre yaar, isko aise karna chahiye' moments into actual features. Your suggestions = our roadmap!",
+    features: ["Feature Voting Rights", "Beta Testing Access", "WhatsApp Group Invite", "Digital High-Five"],
+    supportType: "Jugaad Premium"
   },
   {
     id: 3,
-    name: "Code Wizard Sponsor 🧙‍♂️",
-    price: 799,
-    originalPrice: 1299,
-    image: "💎",
-    description: "Become the Gandalf to our Frodo. Help us build something magical that the world desperately needs!",
-    features: ["Quarterly Video Calls", "Custom Feature Development", "Product Roadmap Input", "Legendary Status"],
-    supportType: "VIP Support"
+    name: "Tech Maharaja 👑",
+    price: 650,
+    originalPrice: 1100,
+    image: "👑",
+    description: "Become the patron saint of this project. Help us build something that makes India proud in the digital world!",
+    features: ["Monthly Video Calls", "Custom Feature Crafting", "Product Vision Input", "Hall of Fame Throne"],
+    supportType: "Elite Darbar"
   },
   {
     id: 0,
-    name: "Curiosity Payment 🔬",
+    name: "UPI Experiment 🧪",
     price: 1,
     originalPrice: 1,
-    image: "🧪",
-    description: "Just testing if this payment thing actually works? We respect the scientific method!",
-    features: ["Dopamine Rush", "Developer Smile", "Test Success Badge"],
-    supportType: "Experimental"
+    image: "📱",
+    description: "Testing the legendary Indian UPI system? Totally valid! Science demands verification before trust.",
+    features: ["Instant Gratification", "Developer's Blessing", "UPI Success Story"],
+    supportType: "Lab Tested"
   }
 ];
 
 const paymentMethods = [
-  { icon: FaCreditCard, name: 'Credit/Debit Cards', desc: 'Visa, MasterCard, RuPay' },
-  { icon: FaMobile, name: 'UPI', desc: 'GPay, PhonePe, Paytm' },
-  { icon: FaUniversity, name: 'Net Banking', desc: 'All major banks' },
-  { icon: FaWallet, name: 'Wallets', desc: 'Paytm, Mobikwik, Amazon Pay' }
+  { icon: FaQrcode, name: 'UPI QR Scan', desc: 'Scan & Pay instantly' },
+  { icon: FaMobile, name: 'UPI ID', desc: 'Pay via UPI handle' },
+  { icon: FaCreditCard, name: 'Cards', desc: 'Credit/Debit cards' },
+  { icon: FaUniversity, name: 'Net Banking', desc: 'Direct bank transfer' }
 ];
 
 const features = [
   {
     icon: FaShieldAlt,
-    title: 'Secure Payments',
-    description: 'PCI DSS Level 1 compliant with 256-bit SSL encryption'
+    title: 'Bank-Grade Security',
+    description: 'NPCI certified with multi-layer security protocols'
   },
   {
     icon: FaBolt,
-    title: 'Instant Processing',
-    description: 'Real-time payment processing with instant confirmations'
+    title: 'Lightning Fast',
+    description: 'Instant UPI transfers with real-time confirmations'
   },
   {
-    icon: FaGlobe,
-    title: 'Multi-Currency',
-    description: 'Support for 100+ currencies and international cards'
+    icon: FaUserFriends,
+    title: 'Social Payments',
+    description: 'Split bills, send money to friends seamlessly'
   },
   {
-    icon: FaHeadset,
-    title: '24/7 Support',
-    description: 'Round-the-clock customer support and dispute resolution'
+    icon: FaStore,
+    title: 'Merchant Network',
+    description: 'Accepted at 30+ million merchants across India'
   }
 ];
 
@@ -107,22 +107,22 @@ function Page() {
 
   const getHumorousMessage = (product: typeof sampleProducts[number]) => {
     const messages: Record<number, string> = {
-      0: "Even ₹1 can make a developer's day! 😊",
-      1: "This coffee might just prevent a bug that would've haunted you at 2 AM! ☕",
-      2: "You're not just buying features, you're buying developer sanity! 🧠",
-      3: "Legend says every sponsor gets their feature request reviewed within 24 hours... okay, we just made that up, but we'll try! 🏆"
+      0: "Even ₹1 can test the power of Indian UPI innovation! 🇮🇳",
+      1: "This chai fund might just prevent that 4 PM energy crash coding session! 🍵",
+      2: "You're not just funding features, you're investing in the Indian startup dream! 🚀",
+      3: "Maharaja level support = VIP treatment in our digital kingdom! 👑"
     };
-    return messages[product.id] || "Supporting indie developers, one payment at a time! 💝";
+    return messages[product.id] || "Powered by Indian innovation, fueled by your support! 💪";
   };
 
   const getSupportIcon = (supportType: string) => {
-    const icons: Record<string, typeof FaHeart> = {
-      "Experimental": FaFlask,
-      "Basic Support": FaCoffee,
-      "Premium Support": FaRocket,
-      "VIP Support": FaGem
+    const icons: Record<string, typeof FaFlask> = {
+      "Lab Tested": FaFlask,
+      "Desi Basic": FaCoffee,
+      "Jugaad Premium": FaRocket,
+      "Elite Darbar": FaGem
     };
-    return icons[supportType] ?? FaHeart;
+    return icons[supportType] || FaHeart;
   };
 
   const handlePayment = async (amount: number, productName: string) => {
@@ -134,22 +134,22 @@ function Page() {
       
       const isTestPayment = amount === 1;
       const successMessage = isTestPayment 
-        ? `🧪 Test Payment Successful!\n\n` +
-          `Congratulations! You've successfully tested the payment system.\n` +
+        ? `📱 UPI Test Payment Successful!\n\n` +
+          `Waah! You've successfully tested the PhonePe integration.\n` +
           `Amount: ₹${amount}\n` +
           `Product: ${productName}\n\n` +
-          `🎉 You've made a developer smile today!\n` +
-          `The ₹1 will go towards buying a samosa for the dev team.`
-        : `🚀 Payment Trigger Initiated!\n\n` +
+          `🎉 Made a developer's day with this ₹1!\n` +
+          `This will go towards buying vada pav for the team.`
+        : `🚀 PhonePe Payment Initiated!\n\n` +
           `Product: ${productName}\n` +
           `Amount: ₹${amount}\n` +
-          `Gateway: Razorpay\n\n` +
-          `💝 Thank you for supporting indie development!\n\n` +
+          `Gateway: PhonePe\n\n` +
+          `🙏 Dhanyawad for supporting Indian tech!\n\n` +
           `Note: This is a demo. In production, this would:\n` +
-          `1. Create order via /api/razorpay/create-order\n` +
-          `2. Open Razorpay checkout widget\n` +
-          `3. Handle success/failure callbacks\n` +
-          `4. Verify payment via /api/razorpay/verify`;
+          `1. Create payment request via PhonePe API\n` +
+          `2. Redirect to PhonePe app/web checkout\n` +
+          `3. Handle callback responses\n` +
+          `4. Verify payment status via webhooks`;
       
       alert(successMessage);
     }, 1500);
@@ -161,7 +161,7 @@ function Page() {
       
       <div className="min-h-screen bg-gray-900 text-white">
         {/* Animated Background */}
-        <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20">
+        <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-indigo-900/20">
         </div>
 
         <div className="relative z-10">
@@ -182,13 +182,13 @@ function Page() {
           <section className="px-6 py-16">
             <div className="max-w-7xl mx-auto text-center">
               <div className="flex items-center justify-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4">
-                  <SiRazorpay className="text-3xl text-white" />
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mr-4">
+                  <SiPhonepe className="text-3xl text-white" />
                 </div>
                 <div className="text-left">
                   <h1 className="text-4xl md:text-5xl font-bold">
-                    <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                      Razorpay
+                    <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+                      PhonePe
                     </span>
                   </h1>
                   <p className="text-gray-400">Integration Demo</p>
@@ -196,19 +196,19 @@ function Page() {
               </div>
               
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
-                Experience seamless payments with India`s leading payment gateway. 
-                Support for UPI, cards, net banking, and digital wallets.
+                Experience the power of India`s favorite payment app. 
+                UPI, QR codes, and seamless digital transactions made simple.
               </p>
               
-              <p className="text-sm text-blue-400 max-w-2xl mx-auto mb-8">
-                💡 Pro tip: Try the ₹1 test payment if you`re just curious about how this works!
+              <p className="text-sm text-purple-400 max-w-2xl mx-auto mb-8">
+                💡 Desi tip: Try the ₹1 UPI test to see how fast Indian payments really are!
               </p>
 
               {/* Payment Methods */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
                 {paymentMethods.map((method, index) => (
                   <div key={index} className="bg-gray-800/50 rounded-xl p-4 border border-gray-700">
-                    <method.icon className="text-2xl text-blue-400 mx-auto mb-2" />
+                    <method.icon className="text-2xl text-purple-400 mx-auto mb-2" />
                     <h3 className="font-semibold text-sm mb-1">{method.name}</h3>
                     <p className="text-xs text-gray-400">{method.desc}</p>
                   </div>
@@ -221,9 +221,9 @@ function Page() {
           <section className="px-6 py-16">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">Support the Author 💝</h2>
-                <p className="text-gray-400 mb-2">Choose how you`d like to support this project and its development</p>
-                <p className="text-sm text-purple-400">Every contribution helps keep the servers running and the coffee flowing! ☕</p>
+                <h2 className="text-3xl font-bold mb-4">Support the Developer 🙏</h2>
+                <p className="text-gray-400 mb-2">Help build something that makes Digital India proud</p>
+                <p className="text-sm text-purple-400">Every rupee helps fuel innovation and keeps the chai flowing! 🍵</p>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -231,7 +231,7 @@ function Page() {
                 <div className="lg:col-span-2">
                   <h3 className="text-xl font-semibold mb-6 flex items-center">
                     <FaHeart className="text-red-500 mr-2" />
-                    Choose Your Support Level
+                    Choose Your Support Style
                   </h3>
                   <div className="grid gap-4">
                     {sampleProducts.map((product) => {
@@ -243,7 +243,7 @@ function Page() {
                           className={`
                             p-6 rounded-2xl border cursor-pointer transition-all duration-300 transform hover:scale-[1.02]
                             ${selectedProduct.id === product.id 
-                              ? 'border-blue-500 bg-blue-500/10 shadow-lg shadow-blue-500/25' 
+                              ? 'border-purple-500 bg-purple-500/10 shadow-lg shadow-purple-500/25' 
                               : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
                             }
                           `}
@@ -256,10 +256,10 @@ function Page() {
                                   <h4 className="text-lg font-semibold">{product.name}</h4>
                                   <span className={`
                                     px-2 py-1 rounded-full text-xs font-medium
-                                    ${product.id === 0 ? 'bg-yellow-500/20 text-yellow-400' :
+                                    ${product.id === 0 ? 'bg-orange-500/20 text-orange-400' :
                                       product.id === 1 ? 'bg-green-500/20 text-green-400' :
-                                      product.id === 2 ? 'bg-blue-500/20 text-blue-400' :
-                                      'bg-purple-500/20 text-purple-400'}
+                                      product.id === 2 ? 'bg-purple-500/20 text-purple-400' :
+                                      'bg-yellow-500/20 text-yellow-400'}
                                   `}>
                                     <SupportIcon className="inline mr-1" />
                                     {product.supportType}
@@ -296,7 +296,7 @@ function Page() {
                   <div className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700 sticky top-6">
                     <h3 className="text-xl font-semibold mb-4 flex items-center">
                       <FaLock className="mr-2 text-green-400" />
-                      Secure Checkout
+                      Secure UPI Checkout
                     </h3>
                     
                     {/* Selected Product Summary */}
@@ -313,7 +313,7 @@ function Page() {
                         {selectedProduct.originalPrice !== selectedProduct.price && (
                           <>
                             <div className="flex justify-between">
-                              <span className="text-gray-400">Original Price:</span>
+                              <span className="text-gray-400">MRP:</span>
                               <span className="line-through text-gray-500">₹{selectedProduct.originalPrice}</span>
                             </div>
                             <div className="flex justify-between">
@@ -323,14 +323,14 @@ function Page() {
                           </>
                         )}
                         <div className="flex justify-between font-semibold text-lg pt-2 border-t border-gray-700">
-                          <span>Total:</span>
-                          <span className="text-blue-400">₹{selectedProduct.price}</span>
+                          <span>Amount:</span>
+                          <span className="text-purple-400">₹{selectedProduct.price}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Humorous Message */}
-                    <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg p-3 mb-4 border border-purple-500/20">
+                    <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-lg p-3 mb-4 border border-purple-500/20">
                       <p className="text-sm text-center text-purple-300">
                         {getHumorousMessage(selectedProduct)}
                       </p>
@@ -345,8 +345,8 @@ function Page() {
                         ${isProcessing 
                           ? 'bg-gray-600 cursor-not-allowed' 
                           : selectedProduct.id === 0 
-                            ? 'bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/25'
-                            : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25'
+                            ? 'bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/25'
+                            : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25'
                         }
                         flex items-center justify-center space-x-2
                       `}
@@ -360,7 +360,7 @@ function Page() {
                         <>
                           <FaRupeeSign />
                           <span>
-                            {selectedProduct.id === 0 ? 'Test Payment' : 'Support with Razorpay'}
+                            {selectedProduct.id === 0 ? 'Test UPI Payment' : 'Pay via PhonePe'}
                           </span>
                         </>
                       )}
@@ -370,17 +370,17 @@ function Page() {
                     <div className="mt-4 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
                       <div className="flex items-center space-x-2 text-green-400 text-sm">
                         <FaShieldAlt />
-                        <span className="font-medium">100% Secure Payment</span>
+                        <span className="font-medium">NPCI Secured Payment</span>
                       </div>
                       <p className="text-xs text-gray-400 mt-1">
-                        Your payment information is encrypted and secure
+                        Bank-grade security with PIN + biometric authentication
                       </p>
                     </div>
                     
                     {selectedProduct.id === 0 && (
-                      <div className="mt-3 p-2 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
-                        <p className="text-xs text-yellow-400 text-center">
-                          🧪 This is just for testing the payment flow!
+                      <div className="mt-3 p-2 bg-orange-500/10 rounded-lg border border-orange-500/20">
+                        <p className="text-xs text-orange-400 text-center">
+                          🧪 Perfect for testing UPI integration!
                         </p>
                       </div>
                     )}
@@ -394,16 +394,16 @@ function Page() {
           <section className="px-6 py-16 bg-gray-800/30">
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold mb-4">Why Choose Razorpay?</h2>
+                <h2 className="text-3xl font-bold mb-4">Why Choose PhonePe?</h2>
                 <p className="text-gray-400 max-w-2xl mx-auto">
-                  Trusted by millions of businesses across India for secure and reliable payments
+                  India`s most trusted digital payments platform with 450+ million registered users
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {features.map((feature, index) => (
                   <div key={index} className="text-center group">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                       <feature.icon className="text-2xl text-white" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
@@ -417,43 +417,43 @@ function Page() {
           {/* Integration Info */}
           <section className="px-6 py-16">
             <div className="max-w-4xl mx-auto text-center">
-              <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl p-8 border border-blue-500/20 backdrop-blur-sm">
-                <h2 className="text-3xl font-bold mb-4">Implementation Details</h2>
+              <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-3xl p-8 border border-purple-500/20 backdrop-blur-sm">
+                <h2 className="text-3xl font-bold mb-4">PhonePe Integration Flow</h2>
                 <p className="text-gray-300 mb-6">
-                  This demo shows the frontend integration. In a production environment, the payment flow would include:
+                  This demo showcases the frontend experience. In production, the PhonePe integration would handle:
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                   <div className="space-y-3">
-                    <h3 className="font-semibold text-blue-400 flex items-center">
+                    <h3 className="font-semibold text-purple-400 flex items-center">
                       <FaCheckCircle className="mr-2" />
-                      Server-side Implementation
+                      Backend Integration
                     </h3>
                     <ul className="text-sm text-gray-400 space-y-1 pl-6">
-                      <li>• Create order via Razorpay API</li>
-                      <li>• Generate secure order signature</li>
-                      <li>• Handle webhook notifications</li>
-                      <li>• Payment verification & database updates</li>
+                      <li>• Merchant authentication with PhonePe</li>
+                      <li>• Payment request creation & encryption</li>
+                      <li>• Webhook handling for status updates</li>
+                      <li>• Transaction verification & reconciliation</li>
                     </ul>
                   </div>
                   
                   <div className="space-y-3">
-                    <h3 className="font-semibold text-purple-400 flex items-center">
+                    <h3 className="font-semibold text-indigo-400 flex items-center">
                       <FaCheckCircle className="mr-2" />
-                      Client-side Integration
+                      User Experience
                     </h3>
                     <ul className="text-sm text-gray-400 space-y-1 pl-6">
-                      <li>• Razorpay checkout widget</li>
-                      <li>• Success/failure callbacks</li>
-                      <li>• Payment status handling</li>
-                      <li>• User experience optimization</li>
+                      <li>• Seamless PhonePe app redirect</li>
+                      <li>• UPI PIN/biometric authentication</li>
+                      <li>• Real-time payment status updates</li>
+                      <li>• Automatic return to merchant app</li>
                     </ul>
                   </div>
                 </div>
                 
                 <div className="mt-8 p-4 bg-gray-800/50 rounded-xl border border-gray-700">
                   <p className="text-sm text-gray-400">
-                    💡 <strong>Fun Fact:</strong> The ₹1 test payment was inspired by developers who just want to see if things actually work before committing to larger amounts. We`ve all been there! 😄
+                    🇮🇳 <strong>Made in India:</strong> PhonePe processes over 12 billion UPI transactions annually, making it the backbone of India`s digital payment revolution. The ₹1 test celebrates this incredible achievement! 
                   </p>
                 </div>
               </div>
