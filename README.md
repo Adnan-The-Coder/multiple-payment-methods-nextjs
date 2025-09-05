@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💳 Multiple Payment Methods in Next.js
 
-## Getting Started
+This is a sample **Next.js** application that demonstrates how to integrate **multiple payment gateways** into a modern web application. The project showcases a flexible, modular approach to adding various payment providers such as:
 
-First, run the development server:
+- ✅ PhonePay
+- ✅ PayPal
+- ✅ Razorpay
+- ✅ (More coming soon...)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧰 Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Frontend:** React, Tailwind CSS (optional)
+- **Backend:** API Routes (Serverless Functions)
+- **Payments:** Phonepay, PayPal, Razorpay, Cashfree, (More coming soon..) 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🔌 Plug-and-play architecture for adding new payment methods
+- 🔒 Secure payment handling via serverless functions
+- 📦 Environment-based configuration for easy deployment
+- 🌐 Supports both local and production environments
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
