@@ -49,8 +49,8 @@ export async function POST(request: NextRequest) {
       order_id: orderId,
       customer_details: customer,
       order_meta: {
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payments/success?order_id={order_id}`,
-        notify_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/payments/cashfree/webhook`,
+        return_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://nex--pay.vercel.app'}/payments/success?order_id={order_id}`,
+        notify_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://nex--pay.vercel.app'}/api/payments/cashfree/webhook`,
         payment_methods: "cc,dc,nb,upi,paylater,emi"
       },
       order_note: `Payment for ${productName}`
