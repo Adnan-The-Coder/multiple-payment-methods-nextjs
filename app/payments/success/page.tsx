@@ -1,10 +1,12 @@
-import { useRouter } from 'next/router';
+"use client";
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const PaymentSuccess = () => {
   const [status, setStatus] = useState('');
   const router = useRouter();
-  const { order_id } = router.query;
+  const searchParams = useSearchParams();
+  const order_id = searchParams.get('order_id');
 
   useEffect(() => {
     if (order_id) {
