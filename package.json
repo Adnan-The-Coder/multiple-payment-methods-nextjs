@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@cashfreepayments/cashfree-js": "^1.0.5",
+    "cashfree-pg": "^5.0.8",
+    "crypto": "^1.0.1",
     "framer-motion": "^12.23.12",
     "next": "15.5.2",
     "razorpay": "^2.9.6",

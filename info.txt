@@ -1,0 +1,123 @@
+Cashfree Inline Checkout
+Accept Payments Online by using Cashfree hosted Inline Payment page - Checkout
+This integration uses Create Order Backend API and JS SDK to open Checkout
+
+1. Setup
+Config
+Select the environment and fill the API Keys (App ID and Secret Key) to get started
+
+environment Production
+App ID TEST430329ae80e0f32e41a393d78b923034
+Secret Key TESTaf195616268bd6202eeb3bf8dc458956e7192a85
+
+Initialize SDK
+Client Side
+Initialize Cashfree JS SDK as below.
+
+<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+
+<script>
+    const cashfree = Cashfree({
+        mode: "sandbox"
+    });
+</script>
+
+ Create Order
+Server Side
+To process any payment on Cashfree PG, the merchant needs to create an order in the cashfree system.
+Use Payment Session ID from the generated response to render the checkout page.
+import { Cashfree, CFEnvironment } from "cashfree-pg"; 
+
+const cashfree = new Cashfree(CFEnvironment.SANDBOX, "TEST430329ae80e0f32e41a393d78b923034", "TESTaf195616268bd6202eeb3bf8dc458956e7192a85");
+
+var request = {
+    "order_amount": 1.00,
+    "order_currency": "INR",
+    "order_id": "devstudio_7369734922189884470",
+    "customer_details": {
+        "customer_id": "devstudio_user",
+        "customer_phone": "9876543210"
+    },
+    "order_meta": {
+        "return_url": "https://www.cashfree.com/devstudio/preview/pg/web/inlineCheckout?order_id={order_id}"
+    }
+};
+
+cashfree.PGCreateOrder(request).then((response) => {
+    console.log('Order created successfully:',response.data);
+}).catch((error) => {
+    console.error('Error:', error.response.data.message);
+});
+
+
+ Load Checkout
+Client Side
+Enter the Payment Session ID below to open the checkout page.
+
+import { load } from "@cashfreepayments/cashfree-js";
+
+function Checkout() {
+    let cashfree;
+    var initializeSDK = async function () {          
+        cashfree = await load({
+            mode: "sandbox"
+        });
+    }
+    initializeSDK();
+
+    const doPayment = async () => {
+        let checkoutOptions = {
+            paymentSessionId: "your-payment-session-id",
+            redirectTarget: document.getElementById("cf_checkout"),
+            appearance: {
+                width: "425px",
+                height: "700px",
+            },
+        };
+        cashfree.checkout(checkoutOptions).then((result) => {
+            if(result.error){
+                // This will be true when there is any error during the payment
+                console.log("There is some payment error, Check for Payment Status");
+                console.log(result.error);
+            }
+            if(result.redirect){
+                // This will be true when the payment redirection page couldnt be opened in the same window
+                // This is an exceptional case only when the page is opened inside an inAppBrowser
+                // In this case the customer will be redirected to return url once payment is completed
+                console.log("Payment will be redirected");
+            }
+            if(result.paymentDetails){
+                // This will be called whenever the payment is completed irrespective of transaction status
+                console.log("Payment has been completed, Check for Payment Status");
+                console.log(result.paymentDetails.paymentMessage);
+            }
+        });
+    };
+
+    return (
+        <div class="row">
+            <p>Click below to open the checkout page here</p>
+            <button type="submit" class="btn btn-primary" id="renderBtn" onClick={doPayment}>
+                Pay Now
+            </button>
+            <div id="cf_checkout"></div>
+        </div>
+    );
+}
+export default Checkout;
+
+Get Payments for an Order
+Server Side
+Once payment is attempted, Customer will be redirected to return_url provided in Create Order API (Step 3) and the order id will be appended as a query param order_id.
+Use the below API to fetch status of all transactions for an order, analyse the API Response and display the final payment status to your customer.
+
+
+import { Cashfree, CFEnvironment } from "cashfree-pg"; 
+
+const cashfree = new Cashfree(CFEnvironment.SANDBOX, "{appId}", "TESTaf195616268bd6202eeb3bf8dc458956e7192a85");
+
+cashfree.PGOrderFetchPayments("your-order-id").then((response) => {
+    console.log('Order fetched successfully:', response.data);
+}).catch((error) => {
+    console.error('Error:', error.response.data.message);
+});
