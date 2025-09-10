@@ -20,7 +20,8 @@ export default function CashfreePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           order_id: orderId,
-          order_amount: orderAmount,
+          amount: orderAmount,
+          productName: "test product",
           return_url: `${window.location.origin}/payment/success?order_id=${orderId}`,
           customer_details: {
             customer_id: 'cust_123',
