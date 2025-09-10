@@ -1,10 +1,10 @@
 "use client";
+
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 
 const PaymentSuccess = () => {
   const [status, setStatus] = useState('');
-  const router = useRouter();
   const searchParams = useSearchParams();
   const order_id = searchParams.get('order_id');
 
@@ -24,4 +24,11 @@ const PaymentSuccess = () => {
   );
 };
 
-export default PaymentSuccess;
+// Wrap it in a Suspense boundary to handle async hooks
+const PaymentSuccessPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <PaymentSuccess />
+  </Suspense>
+);
+
+export default PaymentSuccessPage;
