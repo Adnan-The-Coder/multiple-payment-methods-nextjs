@@ -9,12 +9,16 @@ const cashfree = new Cashfree(
   process.env.CASHFREE_SECRET_KEY || "TESTaf195616268bd6202eeb3bf8dc458956e7192a85"
 );
 
+console.log("Cashfree initialized in", process.env.CASHFREE_ENV || 'development', "mode");
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log("Body received:", body);
     
     // Validate required fields
     const { amount, productName, customerDetails } = body;
+    console.log("object destructured:", { amount, productName, customerDetails });
     
     if (!amount || !productName) {
       return NextResponse.json(
@@ -30,9 +34,11 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    console.log("amount validated:", amount);
 
     // Generate unique order ID
     const orderId = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    console.log("orderId generated:", orderId);
     
     // Prepare customer details with defaults
     const customer = {
@@ -41,6 +47,7 @@ export async function POST(request: NextRequest) {
       customer_email: customerDetails?.customer_email || "adnanali23189@gmail.com",
       customer_name: customerDetails?.customer_name || "Adnan Customer"
     };
+    console.log("customer details prepared:", customer);
 
     // Create order request
     const orderRequest = {
@@ -55,9 +62,11 @@ export async function POST(request: NextRequest) {
       },
       order_note: `Payment for ${productName}`
     };
+    console.log("Order request prepared:", orderRequest);
 
     // Create order with Cashfree
     const response = await cashfree.PGCreateOrder(orderRequest);
+    console.log("response from Cashfree:", response);
     
     if (!response.data) {
       throw new Error('Failed to create order - no response data');
