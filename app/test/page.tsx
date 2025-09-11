@@ -1,20 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { load } from '@cashfreepayments/cashfree-js';
 
 export default function CashfreePage() {
   const [loading, setLoading] = useState(false);
+  const [cashfree, setCashfree] = useState<any>(null);
+
+  // Load Cashfree SDK once on mount
+  useEffect(() => {
+    async function initCashfree() {
+      const cf = await load({ mode: 'sandbox' }); // change to 'production' later
+      setCashfree(cf);
+    }
+    initCashfree();
+  }, []);
 
   const handlePayment = async () => {
     setLoading(true);
 
     try {
-      // Define order details (mock)
+      // Generate unique order
       const orderId = `order_${Date.now()}`;
       const orderAmount = 49.99;
 
+      // Call your API to create order
       const response = await fetch('/api/payments/cashfree/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,7 +34,7 @@ export default function CashfreePage() {
           amount: orderAmount,
           productName: "test product",
           return_url: `${window.location.origin}/payment/success?order_id=${orderId}`,
-          customer_details: {
+          customerDetails: {   // ✅ camelCase
             customer_id: 'cust_123',
             customer_email: 'testuser@example.com',
             customer_phone: '9999999999',
@@ -37,20 +48,25 @@ export default function CashfreePage() {
         throw new Error(data.error || 'Cashfree order creation failed');
       }
 
-      const cashfree = await load({ mode: 'sandbox' }); // change to 'production' when live
+      if (!cashfree) {
+        throw new Error('Cashfree SDK not initialized');
+      }
 
-      await cashfree.checkout({
-        paymentSessionId: data.payment_session_id,
-        redirectTarget: '_modal',
-      }).then((result: any) => {
-        if (result.error) {
-          console.warn('Payment error:', result.error);
-        } else if (result.redirect) {
-          console.log('Redirecting to Cashfree...');
-        } else if (result.paymentDetails) {
-          console.log('Payment successful:', result.paymentDetails);
-        }
-      });
+      // Open Cashfree Checkout
+      await cashfree
+        .checkout({
+          paymentSessionId: data.payment_session_id,
+          redirectTarget: '_modal', // "_self", "_blank", or "_modal"
+        })
+        .then((result: any) => {
+          if (result.error) {
+            console.warn('Payment error:', result.error);
+          } else if (result.redirect) {
+            console.log('Redirecting to Cashfree...');
+          } else if (result.paymentDetails) {
+            console.log('Payment successful:', result.paymentDetails);
+          }
+        });
     } catch (err: any) {
       console.error('Payment error:', err.message || err);
       alert(err.message || 'Something went wrong!');
@@ -63,7 +79,9 @@ export default function CashfreePage() {
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 bg-gray-900 text-white">
       <div className="max-w-md w-full text-center">
         <h1 className="text-3xl font-bold mb-4">Cashfree Payment</h1>
-        <p className="text-gray-400 mb-6">Click the button below to initiate a test payment using Cashfree.</p>
+        <p className="text-gray-400 mb-6">
+          Click the button below to initiate a test payment using Cashfree.
+        </p>
         <button
           onClick={handlePayment}
           disabled={loading}

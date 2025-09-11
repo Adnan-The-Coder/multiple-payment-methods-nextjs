@@ -2,11 +2,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Cashfree, CFEnvironment } from 'cashfree-pg';
 
+console.log("Initiating Cashfree environmment setup..")
 // Initialize Cashfree with environment variables
 const cashfree = new Cashfree(
   process.env.CASHFREE_ENV === 'production' ? CFEnvironment.PRODUCTION : CFEnvironment.SANDBOX,
-  process.env.CASHFREE_APP_ID  || "TEST430329ae80e0f32e41a393d78b923034",
-  process.env.CASHFREE_SECRET_KEY || "TESTaf195616268bd6202eeb3bf8dc458956e7192a85"
+  process.env.CASHFREE_APP_ID  || "",
+  process.env.CASHFREE_SECRET_KEY || ""
 );
 
 console.log("Cashfree initialized in", process.env.CASHFREE_ENV || 'development', "mode");
@@ -17,8 +18,8 @@ export async function POST(request: NextRequest) {
     console.log("Body received:", body);
     
     // Validate required fields
-    const { amount, productName, customerDetails } = body;
-    console.log("object destructured:", { amount, productName, customerDetails });
+    const { amount, productName, customer_details } = body;
+    console.log("object destructured:", { amount, productName, customer_details });
     
     if (!amount || !productName) {
       return NextResponse.json(
@@ -42,10 +43,10 @@ export async function POST(request: NextRequest) {
     
     // Prepare customer details with defaults
     const customer = {
-      customer_id: customerDetails?.customer_id || `customer_${Date.now()}`,
-      customer_phone: customerDetails?.customer_phone || "8290393487",
-      customer_email: customerDetails?.customer_email || "adnanali23189@gmail.com",
-      customer_name: customerDetails?.customer_name || "Adnan Customer"
+      customer_id: customer_details?.customer_id || `customer_${Date.now()}`,
+      customer_phone: customer_details?.customer_phone || "8290393487",
+      customer_email: customer_details?.customer_email || "adnanali23189@gmail.com",
+      customer_name: customer_details?.customer_name || "Adnan Customer"
     };
     console.log("customer details prepared:", customer);
 
@@ -56,7 +57,8 @@ export async function POST(request: NextRequest) {
       order_id: orderId,
       customer_details: customer,
       order_meta: {
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://nex--pay.vercel.app'}/payments/success?order_id={order_id}`,
+        // return_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://nex--pay.vercel.app'}/payments/success?order_id={order_id}`,
+        return_url: "https://test.cashfree.com/pgappsdemos/return.php?order_id=order_123",
         notify_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://nex--pay.vercel.app'}/api/payments/cashfree/webhook`,
         payment_methods: "cc,dc,nb,upi,paylater,emi"
       },
